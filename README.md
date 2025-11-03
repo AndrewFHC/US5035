@@ -8,8 +8,7 @@
 
 ---
 
-## Criterios de aceptación (formato Gherkin)
-## Criterios de aceptación (formato Gherkin)
+## Criterios de aceptación
 
 ## Criterio 1: Redirección a inicio de sesión de Microsoft
 
