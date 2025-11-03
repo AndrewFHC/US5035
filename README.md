@@ -9,45 +9,87 @@
 ---
 
 ## Criterios de aceptación (formato Gherkin)
+## Criterios de aceptación (formato Gherkin)
 
-```gherkin
-Escenario: Inicio de sesión exitoso
-  Dado que el usuario está en la pantalla de bienvenida
-  Cuando selecciona “Iniciar sesión con Microsoft”
-  Y proporciona un correo válido registrado en BD
-  Y proporciona la contraseña correcta
-  Y recibe y valida el código MFA
-  Entonces el sistema le permite el acceso a Galaxy One
+## Criterio 1: Redirección a inicio de sesión de Microsoft
 
-Escenario: Correo inválido
-  Dado que el usuario ingresa un correo con formato incorrecto o no registrado
-  Entonces el sistema muestra un mensaje de error
+| Elemento   | Detalle                                                                 |
+|------------|-------------------------------------------------------------------------|
+| Condición  | Usuario ingresa al sistema Galaxy One y selecciona “Iniciar sesión con Microsoft” |
+| Resultado  | El sistema redirige al usuario a la pantalla de inicio de sesión de Microsoft |
+| Validación | Se muestra la interfaz oficial de Microsoft para ingresar credenciales de acceso |
 
-Escenario: Contraseña incorrecta
-  Dado que el usuario ingresa una contraseña inválida
-  Entonces el sistema muestra un mensaje de error
+---
 
-Escenario: Código MFA incorrecto o expirado
-  Dado que el usuario ingresa un código inválido o expirado
-  Entonces el sistema muestra un mensaje de error informativo
+## Criterio 2: Validación de correo electrónico
 
-Escenario: Reenvío de código
-  Dado que el usuario no recibe el código
-  Entonces puede solicitar el reenvío al correo electrónico
+| Elemento   | Detalle                                                                 |
+|------------|-------------------------------------------------------------------------|
+| Condición  | Usuario ingresa correo electrónico                                      |
+| Resultado  | Acceso a pantalla de ingreso de contraseña si el correo es válido      |
+| Validación | Verificación de formato y existencia en BD                              |
 
-Escenario: Rechazo de acceso
-  Dado que el usuario ingresa el código correcto pero selecciona “No, no soy yo”
-  Entonces el sistema bloquea el acceso
+---
 
-Escenario: Navegación hacia atrás
-  Dado que el usuario está en la pantalla de ingreso de correo
-  Cuando selecciona “Atrás”
-  Entonces el sistema lo redirige a la pantalla de bienvenida
+## Criterio 3: Navegación hacia atrás
 
-Escenario: Registro de intentos
-  Dado cualquier intento de inicio de sesión
-  Entonces el sistema registra fecha, IP, resultado, error (si aplica) y georreferencia
-```
+| Elemento   | Detalle                                                                 |
+|------------|-------------------------------------------------------------------------|
+| Condición  | Usuario da clic en “Atrás” desde pantalla de ingreso de correo         |
+| Resultado  | Redirección a pantalla de bienvenida                                    |
+| Validación | Flujo de navegación correcto                                            |
+
+---
+
+## Criterio 4: Envío de código de verificación
+
+| Elemento   | Detalle                                                                 |
+|------------|-------------------------------------------------------------------------|
+| Condición  | Usuario ingresa credenciales válidas                                    |
+| Resultado  | Sistema envía código de verificación                                    |
+| Validación | Código enviado al canal configurado (correo o app)                     |
+
+---
+
+## Criterio 5: Validación del código MFA
+
+| Elemento   | Detalle                                                                 |
+|------------|-------------------------------------------------------------------------|
+| Condición  | Usuario ingresa código recibido y selecciona “Sí”                       |
+| Resultado  | Acceso aprobado                                                         |
+| Validación | Código correcto y confirmación positiva                                 |
+
+---
+
+## Criterio 6: Rechazo de acceso por el usuario
+
+| Elemento   | Detalle                                                                 |
+|------------|-------------------------------------------------------------------------|
+| Condición  | Usuario ingresa código correcto pero selecciona “No, no soy yo”         |
+| Resultado  | Acceso denegado                                                         |
+| Validación | Confirmación negativa bloquea el acceso                                 |
+
+---
+
+## Criterio 7: Reenvío de código
+
+| Elemento   | Detalle                                                                 |
+|------------|-------------------------------------------------------------------------|
+| Condición  | Usuario no recibe el código o no puede verlo                            |
+| Resultado  | Opción de reenviar código al correo electrónico                         |
+| Validación | Código reenviado correctamente                                          |
+
+---
+
+## Criterio 8: Registro de intentos de acceso
+
+| Elemento   | Detalle                                                                 |
+|------------|-------------------------------------------------------------------------|
+| Condición  | Cualquier intento de inicio de sesión                                   |
+| Resultado  | Registro en BD con metadatos                                            |
+| Validación | Fecha, hora, IP, resultado, error (si aplica), georreferencia  
+
+---
 
 ## Reglas de negocio
 
