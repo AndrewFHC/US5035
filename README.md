@@ -66,15 +66,104 @@ Escenario: Registro de intentos
 
 ## Escenarios posibles
 
-- Inicio de sesión exitoso
-- Correo inválido
-- Contraseña incorrecta
-- Código MFA incorrecto o expirado
-- Rechazo de acceso
-- Reenvío de código
-- Navegación hacia atrás
-- Demora en carga de datos (>10 seg)
-- Registro de intentos
+## Escenario 1: Inicio de sesión exitoso
+
+| Elemento        | Detalle                                                                 |
+|-----------------|-------------------------------------------------------------------------|
+| Condición       | Usuario ingresa correo válido, contraseña correcta y código MFA válido |
+| Resultado       | Acceso permitido                                                        |
+| Mensaje         | "Autenticación exitosa. Bienvenido a Galaxy One."                       |
+
+---
+
+## Escenario 2: Correo inválido
+
+| Elemento        | Detalle                                                                 |
+|-----------------|-------------------------------------------------------------------------|
+| Condición       | Usuario ingresa correo con formato incorrecto o no registrado           |
+| Resultado       | Acceso denegado                                                         |
+| Mensaje         | "El correo ingresado no tiene un formato válido o no está registrado."  |
+
+---
+
+## Escenario 3: Contraseña incorrecta
+
+| Elemento        | Detalle                                                                 |
+|-----------------|-------------------------------------------------------------------------|
+| Condición       | Usuario ingresa contraseña inválida                                     |
+| Resultado       | Acceso denegado                                                         |
+| Mensaje         | "La contraseña ingresada es incorrecta."                                |
+
+---
+
+## Escenario 4: Código MFA incorrecto
+
+| Elemento        | Detalle                                                                 |
+|-----------------|-------------------------------------------------------------------------|
+| Condición       | Usuario ingresa código MFA inválido                                     |
+| Resultado       | Acceso denegado                                                         |
+| Mensaje         | "El código ingresado no es válido. Intenta nuevamente."                 |
+
+---
+
+## Escenario 5: Código MFA expirado
+
+| Elemento        | Detalle                                                                 |
+|-----------------|-------------------------------------------------------------------------|
+| Condición       | Código MFA ingresado ha expirado                                        |
+| Resultado       | Acceso denegado                                                         |
+| Mensaje         | "El código ha expirado. Solicita uno nuevo."                            |
+
+---
+
+## Escenario 6: Rechazo de acceso
+
+| Elemento        | Detalle                                                                 |
+|-----------------|-------------------------------------------------------------------------|
+| Condición       | Usuario ingresa código correcto pero selecciona “No, no soy yo”         |
+| Resultado       | Acceso bloqueado                                                        |
+| Mensaje         | "Acceso denegado. Verifica tu identidad."                               |
+
+---
+
+## Escenario 7: Reenvío de código
+
+| Elemento        | Detalle                                                                 |
+|-----------------|-------------------------------------------------------------------------|
+| Condición       | Usuario no recibe el código y solicita reenviarlo                       |
+| Resultado       | Código reenviado                                                        |
+| Mensaje         | "Se ha reenviado el código de verificación a tu correo."                |
+
+---
+
+## Escenario 8: Navegación hacia atrás
+
+| Elemento        | Detalle                                                                 |
+|-----------------|-------------------------------------------------------------------------|
+| Condición       | Usuario selecciona “Atrás” desde pantalla de ingreso de correo          |
+| Resultado       | Redirección a pantalla de bienvenida                                    |
+| Mensaje         | "Regresando a la pantalla de bienvenida."                               |
+
+---
+
+## Escenario 9: Demora en carga de datos
+
+| Elemento        | Detalle                                                                 |
+|-----------------|-------------------------------------------------------------------------|
+| Condición       | El sistema tarda más de 10 segundos en responder                        |
+| Resultado       | Mensaje informativo                                                     |
+| Mensaje         | "Estamos tardando más de lo esperado. Por favor, espera..."             |
+
+---
+
+## Escenario 10: Registro de intentos
+
+| Elemento        | Detalle                                                                 |
+|-----------------|-------------------------------------------------------------------------|
+| Condición       | Cualquier intento de inicio de sesión                                   |
+| Resultado       | Registro en BD con metadatos                                            |
+| Datos registrados | Fecha, hora, IP, resultado, error (si aplica), georreferencia         |
+
 
 
 ## Request / Response
