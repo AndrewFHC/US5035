@@ -117,24 +117,21 @@ Response: Validación MFA
 
 ```
 
-## Diagrama de Secuencia: Autenticación Galaxy One
+## Tabla de Mensajes del Sistema: Autenticación Galaxy One
 
-| Paso | Actor        | Acción                                                                 |
-|------|--------------|------------------------------------------------------------------------|
-| 1    | Usuario      | Accede al sistema Galaxy One                                           |
-| 2    | Interfaz     | Muestra pantalla de bienvenida                                         |
-| 3    | Usuario      | Clic en “Iniciar sesión con Microsoft”                                |
-| 4    | Interfaz     | Redirige a pantalla de login de MS Entra ID                           |
-| 5    | Usuario      | Ingresa correo electrónico                                             |
-| 6    | MS Entra ID  | Verifica formato y existencia del correo en BD                        |
-| 7    | MS Entra ID  | Si válido, solicita contraseña                                         |
-| 8    | Usuario      | Ingresa contraseña                                                     |
-| 9    | MS Entra ID  | Verifica credenciales en BD                                            |
-| 10   | MS Entra ID  | Si válidas, envía código MFA                                           |
-| 11   | Usuario      | Ingresa código MFA                                                     |
-| 12   | MS Entra ID  | Verifica código                                                        |
-| 13   | Usuario      | Clic en “Sí” o “No, no soy yo”                                         |
-| 14   | MS Entra ID  | Si “Sí” y código correcto → acceso permitido                          |
-| 15   | MS Entra ID  | Si “No” o código incorrecto → acceso denegado                         |
-| 16   | Interfaz     | Muestra dashboard según rol o mensaje de error                        |
-| 17   | Sistema      | Registra intento en BD con fecha, IP, resultado, error y georreferencia |
+| Tipo de mensaje | Condición del sistema                                      | Mensaje mostrado al usuario                                      |
+|-----------------|------------------------------------------------------------|------------------------------------------------------------------|
+| ✅ Éxito         | Inicio de sesión completado correctamente                  | "Autenticación exitosa. Bienvenido a Galaxy One."                |
+| ✅ Éxito         | Código MFA validado y usuario confirma identidad           | "Código verificado. Accediendo al sistema..."                    |
+| ✅ Éxito         | Código reenviado correctamente                             | "Se ha reenviado el código de verificación a tu correo."         |
+| ⚠️ Error         | Correo electrónico con formato inválido                    | "El correo ingresado no tiene un formato válido."                |
+| ⚠️ Error         | Correo no registrado en la base de datos                   | "El correo ingresado no está registrado."                        |
+| ⚠️ Error         | Contraseña incorrecta                                      | "La contraseña ingresada es incorrecta."                         |
+| ⚠️ Error         | Código MFA incorrecto                                      | "El código ingresado no es válido. Intenta nuevamente."          |
+| ⚠️ Error         | Código MFA expirado                                        | "El código ha expirado. Solicita uno nuevo."                     |
+| ⚠️ Error         | Usuario selecciona “No, no soy yo”                         | "Acceso denegado. Verifica tu identidad."                        |
+| ⚠️ Error         | Usuario no ingresa el código MFA                           | "Debes ingresar el código de verificación para continuar."       |
+| ⚠️ Error         | Fallo en la verificación de credenciales                   | "No se pudo verificar tu identidad. Revisa tus datos."           |
+| ⚠️ Error         | Demora excesiva en carga de datos (>10 segundos)          | "Estamos tardando más de lo esperado. Por favor, espera..."      |
+| ⚠️ Error         | Fallo inesperado del sistema                               | "Ha ocurrido un error inesperado. Intenta nuevamente más tarde." |
+
