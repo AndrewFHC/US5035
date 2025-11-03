@@ -252,17 +252,18 @@ Response: Validación MFA
 
 | Tipo de mensaje | Condición del sistema                                      | Mensaje mostrado al usuario                                      |
 |-----------------|------------------------------------------------------------|------------------------------------------------------------------|
-| ✅ Éxito         | Inicio de sesión completado correctamente                  | "Autenticación exitosa. Bienvenido a Galaxy One."                |
-| ✅ Éxito         | Código MFA validado y usuario confirma identidad           | "Código verificado. Accediendo al sistema..."                    |
-| ✅ Éxito         | Código reenviado correctamente                             | "Se ha reenviado el código de verificación a tu correo."         |
-| ⚠️ Error         | Correo electrónico con formato inválido                    | "El correo ingresado no tiene un formato válido."                |
-| ⚠️ Error         | Correo no registrado en la base de datos                   | "El correo ingresado no está registrado."                        |
-| ⚠️ Error         | Contraseña incorrecta                                      | "La contraseña ingresada es incorrecta."                         |
-| ⚠️ Error         | Código MFA incorrecto                                      | "El código ingresado no es válido. Intenta nuevamente."          |
-| ⚠️ Error         | Código MFA expirado                                        | "El código ha expirado. Solicita uno nuevo."                     |
-| ⚠️ Error         | Usuario selecciona “No, no soy yo”                         | "Acceso denegado. Verifica tu identidad."                        |
-| ⚠️ Error         | Usuario no ingresa el código MFA                           | "Debes ingresar el código de verificación para continuar."       |
-| ⚠️ Error         | Fallo en la verificación de credenciales                   | "No se pudo verificar tu identidad. Revisa tus datos."           |
-| ⚠️ Error         | Demora excesiva en carga de datos (>10 segundos)          | "Estamos tardando más de lo esperado. Por favor, espera..."      |
-| ⚠️ Error         | Fallo inesperado del sistema                               | "Ha ocurrido un error inesperado. Intenta nuevamente más tarde." |
+| Éxito           | Inicio de sesión completado correctamente                  | "Autenticación exitosa. Bienvenido a Galaxy One."                |
+| Éxito           | Código MFA validado y usuario confirma identidad           | "Código verificado. Accediendo al sistema..."                    |
+| Éxito           | Código reenviado correctamente                             | "Se ha reenviado el código de verificación a tu correo."         |
+| Error           | Correo electrónico con formato inválido                    | "El correo ingresado no tiene un formato válido."                |
+| Error           | Correo no registrado en la base de datos                   | "El correo ingresado no está registrado."                        |
+| Error           | Contraseña incorrecta                                      | "La contraseña ingresada es incorrecta."                         |
+| Error           | Código MFA incorrecto                                      | "El código ingresado no es válido. Intenta nuevamente."          |
+| Error           | Código MFA expirado                                        | "El código ha expirado. Solicita uno nuevo."                     |
+| Error           | Usuario selecciona “No, no soy yo”                         | "Acceso denegado. Verifica tu identidad."                        |
+| Error           | Usuario no ingresa el código MFA                           | "Debes ingresar el código de verificación para continuar."       |
+| Error           | Fallo en la verificación de credenciales                   | "No se pudo verificar tu identidad. Revisa tus datos."           |
+| Error           | Demora excesiva en carga de datos (>10 segundos)          | "Estamos tardando más de lo esperado. Por favor, espera..."      |
+| Error           | Fallo inesperado del sistema                               | "Ha ocurrido un error inesperado. Intenta nuevamente más tarde." |
+
 
