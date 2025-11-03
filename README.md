@@ -223,5 +223,7 @@ Response: Validación MFA
 | Error           | Fallo en la verificación de credenciales                   | "No se pudo verificar tu identidad. Revisa tus datos."           |
 | Error           | Demora excesiva en carga de datos (>10 segundos)          | "Estamos tardando más de lo esperado. Por favor, espera..."      |
 | Error           | Fallo inesperado del sistema                               | "Ha ocurrido un error inesperado. Intenta nuevamente más tarde." |
+|-----------------|------------------------------------------------------------|------------------------------------------------------------------|
+
 
 
