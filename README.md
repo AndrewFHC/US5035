@@ -117,37 +117,24 @@ Response: Validación MFA
 
 ```
 
-sequenceDiagram
-    participant Usuario
-    participant Interfaz
-    participant MS Entra ID
-    participant BD
+## Diagrama de Secuencia: Autenticación Galaxy One
 
-    Usuario->>Interfaz: Accede a Galaxy One
-    Interfaz->>Usuario: Muestra pantalla de bienvenida
-    Usuario->>Interfaz: Clic en "Iniciar sesión con Microsoft"
-    Interfaz->>MS Entra ID: Redirige a pantalla de login
-    Usuario->>MS Entra ID: Ingresa correo electrónico
-    MS Entra ID->>BD: Verifica formato y existencia del correo
-    alt Correo válido
-        MS Entra ID->>Usuario: Solicita contraseña
-        Usuario->>MS Entra ID: Ingresa contraseña
-        MS Entra ID->>BD: Verifica credenciales
-        alt Credenciales válidas
-            MS Entra ID->>Usuario: Envía código MFA
-            Usuario->>MS Entra ID: Ingresa código MFA
-            MS Entra ID->>BD: Verifica código
-            alt Código correcto y clic en "Sí"
-                MS Entra ID->>Interfaz: Autenticación exitosa
-                Interfaz->>Usuario: Acceso a dashboard según rol
-            else Código incorrecto o clic en "No"
-                MS Entra ID->>Usuario: Acceso denegado
-            end
-        else Credenciales inválidas
-            MS Entra ID->>Usuario: Muestra error de autenticación
-        end
-    else Correo inválido
-        MS Entra ID->>Usuario: Muestra error de correo
-    end
-
-    Note over Interfaz,BD: Registrar intento de acceso con fecha, IP, resultado, error y georreferencia
+| Paso | Actor        | Acción                                                                 |
+|------|--------------|------------------------------------------------------------------------|
+| 1    | Usuario      | Accede al sistema Galaxy One                                           |
+| 2    | Interfaz     | Muestra pantalla de bienvenida                                         |
+| 3    | Usuario      | Clic en “Iniciar sesión con Microsoft”                                |
+| 4    | Interfaz     | Redirige a pantalla de login de MS Entra ID                           |
+| 5    | Usuario      | Ingresa correo electrónico                                             |
+| 6    | MS Entra ID  | Verifica formato y existencia del correo en BD                        |
+| 7    | MS Entra ID  | Si válido, solicita contraseña                                         |
+| 8    | Usuario      | Ingresa contraseña                                                     |
+| 9    | MS Entra ID  | Verifica credenciales en BD                                            |
+| 10   | MS Entra ID  | Si válidas, envía código MFA                                           |
+| 11   | Usuario      | Ingresa código MFA                                                     |
+| 12   | MS Entra ID  | Verifica código                                                        |
+| 13   | Usuario      | Clic en “Sí” o “No, no soy yo”                                         |
+| 14   | MS Entra ID  | Si “Sí” y código correcto → acceso permitido                          |
+| 15   | MS Entra ID  | Si “No” o código incorrecto → acceso denegado                         |
+| 16   | Interfaz     | Muestra dashboard según rol o mensaje de error                        |
+| 17   | Sistema      | Registra intento en BD con fecha, IP, resultado, error y georreferencia |
